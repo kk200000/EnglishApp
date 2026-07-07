@@ -8,6 +8,6 @@ export class AppService {
     private readonly response: ResponseService,
   ) {}
   getHello() {
-    return this.response.success(this.prisma.findMany());
+    return 123
   }
 }
