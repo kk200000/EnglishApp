@@ -1,9 +1,26 @@
 import axios from 'axios'
 
-export const ApiClient = axios.create({
-  baseURL: 'http://localhost:3000/api',
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+const timeout = 10000
+export const serverApiClient = axios.create({
+  baseURL: '/api/v1',
+  timeout,
+
+})
+
+serverApiClient.interceptors.response.use(
+  res => res.data
+)
+
+export interface Response<T = any> {
+  timestamp: string,
+  path: string,
+  message: string,
+  code: number,
+  success: boolean,
+  data: T
+}
+
+export const aiApiClient = axios.create({
+  baseURL: '/api/ai/v1',
+  timeout,
 })

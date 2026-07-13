@@ -1,0 +1,38 @@
+### 基础查询 - 分页获取单词列表
+GET http://localhost:3000/api/v1/word-book?page=1&pageSize=12 HTTP/1.1
+
+### 按单词搜索
+GET http://localhost:3000/api/v1/word-book?page=1&pageSize=12&word=hello HTTP/1.1
+
+### 按高考词汇筛选
+GET http://localhost:3000/api/v1/word-book?page=1&pageSize=12&gk=true HTTP/1.1
+
+### 按中考词汇筛选
+GET http://localhost:3000/api/v1/word-book?page=1&pageSize=12&zk=true HTTP/1.1
+
+### 按GRE词汇筛选
+GET http://localhost:3000/api/v1/word-book?page=1&pageSize=12&gre=true HTTP/1.1
+
+### 按TOEFL词汇筛选
+GET http://localhost:3000/api/v1/word-book?page=1&pageSize=12&toefl=true HTTP/1.1
+
+### 按IELTS词汇筛选
+GET http://localhost:3000/api/v1/word-book?page=1&pageSize=12&ielts=true HTTP/1.1
+
+### 按大学英语六级筛选
+GET http://localhost:3000/api/v1/word-book?page=1&pageSize=12&cet6=true HTTP/1.1
+
+### 按大学英语四级筛选
+GET http://localhost:3000/api/v1/word-book?page=1&pageSize=12&cet4=true HTTP/1.1
+
+### 考研词汇筛选
+GET http://localhost:3000/api/v1/word-book?page=1&pageSize=12&ky=true HTTP/1.1
+
+### 组合筛选 - 高考 + 四级词汇
+GET http://localhost:3000/api/v1/word-book?page=1&pageSize=12&gk=true&cet4=true HTTP/1.1
+
+### 组合筛选 - 搜索同时按考研词汇筛选
+GET http://localhost:3000/api/v1/word-book?page=1&pageSize=12&word=abandon&ky=true HTTP/1.1
+
+### 分页 - 获取第二页
+GET http://localhost:3000/api/v1/word-book?page=2&pageSize=20 HTTP/1.1
