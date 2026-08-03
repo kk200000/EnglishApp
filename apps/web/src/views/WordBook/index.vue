@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { getWordBook } from '@/apis/word-book'
+import { getWordBookList } from '@/apis/word-book'
 import type { WordList, WordQuery } from '@en/common/word'
 import { onMounted, ref } from 'vue'
 import { Reading, VideoPlay } from '@element-plus/icons-vue'
@@ -78,7 +78,7 @@ const query = ref<WordQuery>({
 
 const getList = async () => {
 
-  const res = await getWordBook(query.value)
+  const res = await getWordBookList(query.value)
   if (res.success) {
     total.value = res.data.total
     list.value = res.data.list ?? []
