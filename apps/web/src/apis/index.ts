@@ -1,13 +1,13 @@
 import axios from 'axios'
 
 const timeout = 10000
-export const serverApiClient = axios.create({
+export const serverApi= axios.create({
   baseURL: '/api/v1',
   timeout,
 
 })
 
-serverApiClient.interceptors.response.use(
+serverApi.interceptors.response.use(
   res => res.data
 )
 

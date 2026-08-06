@@ -1,5 +1,5 @@
 <template>
-    <div class="w-300 mx-auto mt-10 pb-30">
+    <div class="w-[1200px] mx-auto mt-10 pb-30">
         <!-- 背景区域 -->
         <div class="relative flex justify-between rounded-[20px] p-9">
             <div class="absolute inset-0 bg-linear-to-r from-gray-900 via-gray-900 to-gray-900/70 rounded-[20px]" />
@@ -8,7 +8,8 @@
                 <div class="text-2xl font-bold pt-8 text-l text-indigo-500">通过跟AI对话，提高你的英语水平</div>
                 <div class="text-1xl font-bold pt-5 text-gray-300">超1000000学员的选择，提升您的英语能力</div>
                 <div class="flex items-center gap-2 pt-10">
-                    <button @click="login"
+                    <button
+                        @click="showLogin"
                         class="bg-indigo-700 text-white rounded-[100px] px-4 py-2 cursor-pointer text-sm block w-30 h-10">立即学习</button>
                     <button
                         class="bg-indigo-700 text-white rounded-[100px] px-4 py-2 cursor-pointer text-sm block w-30 h-10">查看课程</button>
@@ -80,13 +81,13 @@
 
 
 <script setup lang="ts">
-import { useLogin } from '@/hooks/useLogin.ts'
 import Hologram from './components/Hologram.vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { onMounted, reactive } from 'vue'
-gsap.registerPlugin(ScrollTrigger)   // 完成 是否出现在可视区域内 这个判断  
-// 底层 Intersection Observer 判断ratio有没有出现在可视区域内
+import { useLogin } from '@/hooks/useLogin'
+const { login } = useLogin()
+gsap.registerPlugin(ScrollTrigger)
 const stats = reactive([
     { value: 0, suffix: '+', label: '累计学员', target: 1000000 },
     { value: 0, suffix: '+', label: '精品课程', target: 500 },
@@ -136,7 +137,7 @@ const initProject = () => {
                 duration: 0.5,
                 delay: index * 0.08,
                 ease: 'power2.out',
-                scrollTrigger: {   // 滑到哪的时候触发
+                scrollTrigger: {
                     trigger: '.cards-container',
                     start: 'top 75%',
                 }
@@ -192,9 +193,12 @@ const initProject = () => {
         }
     })
 }
-const { login } = useLogin()
 
-
+const showLogin = () => {
+     login().then(() => {
+        console.log('登录成功之后跳转页面')
+     })
+}
 onMounted(() => {
     initProject()
 })

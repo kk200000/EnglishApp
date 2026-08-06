@@ -1,18 +1,28 @@
 import { Injectable } from '@nestjs/common';
-
+const Business = {
+    SUCCESS: {
+        code: 200,
+        message: 'success',
+    },
+    ERROR: {
+        code: 500,
+        message: 'error',
+    },
+}
 @Injectable()
 export class ResponseService {
-    success(data, message: string = '操作成功',code: number = 200) {
+    success(data: any) {
         return {
             data,
-            message,
-            code
+            code: Business.SUCCESS.code,
+            message: Business.SUCCESS.message,
         }
     }
-    error(message: string = '操作失败', code: number = 500) {
+    error(data = null, message: string, code: number = Business.ERROR.code) {
         return {
-            message,
-            code
+            data,
+            code,
+            message: message || Business.ERROR.message,
         }
     }
 }

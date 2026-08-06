@@ -1,14 +1,17 @@
 {
 	"scripts": {
-		"web":"pnpm --filter @en/web dev",
-		"server":"pnpm --filter @en/server start:dev",
-		"ai":"pnpm --filter @en/server start:dev ai",
-		"all":"concurrently \"pnpm run web\" \"pnpm run server\" \"pnpm run ai\""
+		"web": "pnpm --filter @en/web dev",
+		"server": "pnpm --filter @en/server start:dev",
+		"ai": "pnpm --filter @en/server start:dev ai",
+		"all": "concurrently \"pnpm run web\" \"pnpm run server\" \"pnpm run ai\""
 	},
 	"dependencies": {
+		"@nestjs/config": "^4.0.4",
+		"@nestjs/jwt": "^11.0.2",
 		"@types/md5": "^2.3.6",
 		"concurrently": "^9.2.1",
 		"dayjs": "^1.11.21",
-		"md5": "^2.3.0"
+		"md5": "^2.3.0",
+		"server": "^1.0.42"
 	}
 }
