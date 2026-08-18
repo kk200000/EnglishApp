@@ -11,13 +11,13 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js' //�
 import { useTemplateRef,onMounted } from 'vue'
 const hologramRef = useTemplateRef<HTMLCanvasElement>('hologramRef')
 const initThree = () => {
-
+    
     //创建场景 -> 网格(几何 + 材质) + 相机 + 渲染器 + 灯光(可选的)
     //创建场景 -> 模型obj gltf ... + 相机 + 渲染器 + 灯光(可选的)
     const scene = new THREE.Scene()
     //动画混合器
     let mixer: THREE.AnimationMixer | null = null
-    const clock = new THREE.Timer() //创建时钟
+    const clock = new THREE.Clock() //创建时钟
     //创建相机
     const camera = new THREE.PerspectiveCamera(75, 500 / 250, 0.1, 1000)
     camera.position.set(0, 0, 10)
@@ -37,12 +37,10 @@ const initThree = () => {
     //环境光
     const ambientLight = new THREE.AmbientLight(0xffffff, 1)
     scene.add(ambientLight)
-    
     //平行光
     const directionalLight = new THREE.DirectionalLight(0xffffff, 2)
     directionalLight.position.set(5, 10, 7.5)
     scene.add(directionalLight)
-
     //创建渲染器
     const renderer = new THREE.WebGLRenderer({
         canvas: hologramRef.value!,

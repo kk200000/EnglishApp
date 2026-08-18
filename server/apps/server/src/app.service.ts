@@ -1,13 +1,9 @@
-import { PrismaService, ResponseService } from '@libs/shared';
 import { Injectable } from '@nestjs/common';
-
+import { PrismaService } from '@libs/shared';
 @Injectable()
 export class AppService {
-  constructor(
-    private readonly prisma: PrismaService,
-    private readonly response: ResponseService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
   getHello() {
-    return 123
+    return '访问成功'
   }
 }

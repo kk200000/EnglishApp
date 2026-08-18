@@ -4,34 +4,35 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ResponseModule } from './response/response.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-
+import { MinioModule } from './minio/minio.module';
 
 @Global()
 @Module({
-  providers: [SharedService],
-  exports: [
-    SharedService,
-    PrismaModule,
-    ResponseModule,
-    JwtModule,
-    ConfigModule,
-  ],
-  imports: [
-    PrismaModule,
-    ResponseModule,
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        secret: configService.get('SECRET_KEY'),
-        signOptions: { expiresIn: 10 }, //10s
-      }),
-      
-    }),
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: '.env',
-    }),
-  ],
+	providers: [SharedService],
+	exports: [
+		SharedService,
+		PrismaModule,
+		ResponseModule,
+		JwtModule,
+		ConfigModule,
+		MinioModule,
+	],
+	imports: [
+		PrismaModule,
+		ResponseModule,
+		JwtModule.registerAsync({
+			imports: [ConfigModule],
+			inject: [ConfigService],
+			useFactory: async (configService: ConfigService) => ({
+				secret: configService.get('SECRET_KEY'),
+				signOptions: { expiresIn: 10 }, //10s
+			}),
+		}),
+		ConfigModule.forRoot({
+			isGlobal: true,
+			envFilePath: '.env',
+		}),
+		MinioModule,
+	],
 })
 export class SharedModule {}

@@ -6,6 +6,7 @@
 		"all": "concurrently \"pnpm run web\" \"pnpm run server\" \"pnpm run ai\""
 	},
 	"dependencies": {
+		"@en/server": "link:server",
 		"@nestjs/config": "^4.0.4",
 		"@nestjs/jwt": "^11.0.2",
 		"@types/md5": "^2.3.6",

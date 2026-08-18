@@ -1,9 +1,10 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query,UseGuards,Req } from '@nestjs/common';
 import { WordBookService } from './word-book.service';
-import type { WordQuery } from '@en/common/word'
+import type { WordQuery } from '@en/common/word';
+import { AuthGuard } from '@libs/shared/auth/auth.guard';
 @Controller('word-book')
 export class WordBookController {
-  constructor(private readonly wordBookService: WordBookService) { }
+  constructor(private readonly wordBookService: WordBookService) {}
 
   @Get()
   findAll(@Query() query: WordQuery) {

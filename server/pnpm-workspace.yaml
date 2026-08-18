@@ -3,6 +3,6 @@ packages:
   - 'libs/*'
   - '../packages/*'
 allowBuilds:
-  '@prisma/engines': set this to true or false
-  prisma: set this to true or false
-  unrs-resolver: set this to true or false
+  '@prisma/engines': true
+  prisma: true
+  unrs-resolver: true
