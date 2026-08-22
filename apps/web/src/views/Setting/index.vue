@@ -20,7 +20,7 @@
 
                     <div class="flex items-center gap-4">
                         <img class="w-20 h-20 rounded-full object-cover border-2 border-gray-200"
-                            :src="previewUrl || avatar" loading="lazy" referrerpolicy="no-referrer" />
+                            :src="previewUrl || defaultAvatar" loading="lazy" referrerpolicy="no-referrer" />
 
                         <div class="flex flex-col gap-2">
                             <el-upload :show-file-list="false" :auto-upload="false" accept="image/*"
@@ -112,7 +112,7 @@
 import { ref, onMounted, useTemplateRef } from 'vue'
 import type { UserUpdate } from '@en/common/user'
 import type { FormRules } from 'element-plus'
-import avatar from '@/assets/images/avatar/default-avatar.png'
+import defaultAvatar from '@/assets/images/avatar/default-avatar.png'
 import { useUserStore } from '@/stores/user'
 import { uploadAvatar, updateUser } from '@/apis/user' //上传头像接口 //更新用户信息接口
 import type { UploadFile, FormInstance } from 'element-plus' //上传文件类型

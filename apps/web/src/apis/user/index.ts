@@ -6,6 +6,6 @@ export const login = (data: UserLogin) =>
 export const register = (data: UserRegister) =>
 	serverApi.post('/user/register', data) as Promise<Response<WebResultUser>>
 export const updateUser = (data: any) =>
-	serverApi.put('/user/update', data) as Promise<Response<WebResultUser>>
+	serverApi.post('/user/update-user', data) as Promise<Response<WebResultUser>>
 export const uploadAvatar = (data: FormData) =>
 	serverApi.post('/user/upload-avatar', data) as Promise<Response<AvatarResult>>

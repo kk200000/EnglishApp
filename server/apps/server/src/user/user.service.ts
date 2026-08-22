@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import type {
 	UserLogin,
 	UserRegister,
@@ -113,7 +113,7 @@ export class UserService {
 			);
 			//2.为什么增加这么一个判断 accessToken 冒充refreshToken 进行攻击
 			if (decoded.tokenType !== 'refresh') {
-				return this.responseService.error(null, 'refreshToken已过期或无效');
+				throw new UnauthorizedException('refreshToken已过期或无效');
 			}
 			const user = await this.prisma.user.findUnique({
 				where: {
@@ -131,7 +131,7 @@ export class UserService {
 			});
 			return this.responseService.success(token);
 		} catch (error) {
-			return this.responseService.error(null, 'refreshToken已过期或无效');
+			throw new UnauthorizedException('refreshToken已过期或无效');
 		}
 	}
 	//上传头像
@@ -158,7 +158,6 @@ export class UserService {
 		const port = this.configService.get<string>('MINIO_PORT')!; //端口9000
 		const databaseUrl = `/${bucket}/${fileName}`; //数据库url /avatar/1234567890-xiaomansdas.jpg
 		const previewUrl = `${baseUrl}://${this.configService.get('MINIO_ENDPOINT')}:${port}${databaseUrl}`;
-		//previewUrl->http://192.168.2.100:9000/avatar/1234567890-xiaomansdas.jpg
 		//databaseUrl->/avatar/1234567890-xiaomansdas.jpg
 		return this.responseService.success({
 			previewUrl,
