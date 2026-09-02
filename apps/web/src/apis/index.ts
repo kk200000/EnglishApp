@@ -86,7 +86,7 @@ serverApi.interceptors.response.use(
 )
 //ai服务器接口
 export const aiApi = axios.create({
-	baseURL: '/api/ai/v1',
+	baseURL: '/ai/v1',
 	timeout,
 })
 
