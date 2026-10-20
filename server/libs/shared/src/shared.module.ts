@@ -6,6 +6,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MinioModule } from './minio/minio.module';
 
+import { PayModule } from './pay/pay.module';
+import { EmailModule } from './email/email.module';
 @Global()
 @Module({
 	providers: [SharedService],
@@ -16,6 +18,8 @@ import { MinioModule } from './minio/minio.module';
 		JwtModule,
 		ConfigModule,
 		MinioModule,
+		PayModule,
+		EmailModule,
 	],
 	imports: [
 		PrismaModule,
@@ -23,7 +27,7 @@ import { MinioModule } from './minio/minio.module';
 		JwtModule.registerAsync({
 			imports: [ConfigModule],
 			inject: [ConfigService],
-			useFactory: async (configService: ConfigService) => ({
+			useFactory: (configService: ConfigService) => ({
 				secret: configService.get('SECRET_KEY'),
 				signOptions: { expiresIn: 10 }, //10s
 			}),
@@ -33,6 +37,8 @@ import { MinioModule } from './minio/minio.module';
 			envFilePath: '.env',
 		}),
 		MinioModule,
+		PayModule,
+		EmailModule,
 	],
 })
 export class SharedModule {}

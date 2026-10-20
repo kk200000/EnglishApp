@@ -130,7 +130,7 @@ export class UserService {
 				email: user.email,
 			});
 			return this.responseService.success(token);
-		} catch (error) {
+		} catch {
 			throw new UnauthorizedException('refreshToken已过期或无效');
 		}
 	}
@@ -153,9 +153,12 @@ export class UserService {
 			'Content-Type': file.mimetype,
 		});
 		//返回文件url
-		const isHttps = !!Number(this.configService.get('MINIO_USE_SSL')); //是否启用SSL
+		const ssl = String(this.configService.get('MINIO_USE_SSL') ?? '')
+			.trim()
+			.toLowerCase();
+		const isHttps = ssl === 'true' || ssl === '1'; //是否启用SSL
 		const baseUrl = isHttps ? 'https' : 'http'; //前缀http
-		const port = this.configService.get<string>('MINIO_PORT')!; //端口9000
+		const port = this.configService.get<string>('MINIO_PORT') ?? '9000'; //端口9000
 		const databaseUrl = `/${bucket}/${fileName}`; //数据库url /avatar/1234567890-xiaomansdas.jpg
 		const previewUrl = `${baseUrl}://${this.configService.get('MINIO_ENDPOINT')}:${port}${databaseUrl}`;
 		//databaseUrl->/avatar/1234567890-xiaomansdas.jpg

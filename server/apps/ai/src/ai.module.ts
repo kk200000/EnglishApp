@@ -4,9 +4,10 @@ import { AiService } from './ai.service';
 import { ChatModule } from './chat/chat.module';
 import { PromptModule } from './prompt/prompt.module';
 import { SharedModule } from '@libs/shared'; //共享模块
+import { DigestModule } from './digest/digest.module';
 @Module({
-  imports: [ChatModule, PromptModule, SharedModule],
-  controllers: [AiController],
-  providers: [AiService],
+	imports: [ChatModule, PromptModule, SharedModule, DigestModule.register()],
+	controllers: [AiController],
+	providers: [AiService],
 })
 export class AiModule {}
