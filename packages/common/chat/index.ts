@@ -1,9 +1,12 @@
 export type ChatRole = 'human' | 'ai'; //角色 human: 用户 ai: 助手 langchain框架的枚举
 export type ChatRoleType = 'normal' | 'master' | 'business' | 'qilinge' | 'xiaoman'; //角色类型
+export type ChatMessageType = 'reasoning' | 'chat'; //消息类型 reasoning: 推理 chat: 聊天
 //消息列表的对象类型
 export type ChatMessage = {
     role:ChatRole //角色 human: 用户 ai: 助手
-    content:string; //内容
+    content:string; //Chat聊天所返回的内容
+    reasoning?:string; //深度思考所返回的内容
+    type:ChatMessageType // reasoning: 深度思考的一个状态 chat: 聊天的状态
 }
 //消息列表
 export type ChatMessageList = ChatMessage[]
@@ -20,6 +23,8 @@ export type ChatModeList = ChatMode[]
 
 //定义发送消息的类型
 export type ChatDto = {
+    deepThink:boolean; //深度思考
+    webSearch:boolean; //联网搜索
     role:ChatRoleType; //角色
     content:string; //内容
     userId:string; //用户id

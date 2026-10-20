@@ -15,7 +15,15 @@ export class ChatController {
     const stream = await this.chatService.streamCompletion(createChatDto);
     for await (const chunk of stream) {
       const [msg] = chunk
-      res.write(`data: ${JSON.stringify({content:msg.content,role:'ai'})}\n\n`);
+      //深度思考返回的内容不在content中，在additional_kwargs.reasoning_content中
+      const thinkMsg = msg.additional_kwargs?.reasoning_content ?? ''
+      if(thinkMsg){
+        res.write(`data: ${JSON.stringify({content:thinkMsg,role:'ai',type:'reasoning'})}\n\n`);
+      }
+      const content = msg.content ?? '' //普通Chat对话的内容
+      if(content){
+        res.write(`data: ${JSON.stringify({content:content,role:'ai',type:'chat'})}\n\n`);
+      }
     }
     res.end();
   }

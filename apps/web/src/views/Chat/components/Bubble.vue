@@ -31,6 +31,9 @@ import { ref, useTemplateRef, watch, nextTick } from 'vue'
 import { Position } from '@element-plus/icons-vue';
 import type { ChatMessageList } from '@en/common/chat';
 import { marked } from 'marked'
+
+const deepThink = ref(false)
+const webSearch = ref(false)
 const emits = defineEmits(['onSendMessage'])
 const chatRef = useTemplateRef<HTMLDivElement>('chatRef') //读取DOM元素
 const props = defineProps<{
@@ -39,8 +42,8 @@ const props = defineProps<{
 const message = ref<string>('') //发送的内容
 //发送消息
 const sendMessage = () => {
-    if(!message.value) return
-    emits('onSendMessage', message.value)
+    if (!message.value) return
+    emits('onSendMessage', message.value, deepThink.value, webSearch.value)
     message.value = ''
 }
 //markdown解析HTML
